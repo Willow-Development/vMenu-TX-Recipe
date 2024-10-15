@@ -1,0 +1,75 @@
+# Need support? Join my Discord! https://discord.gg/8TKfHkvdrY
+$engine: 3
+$onesync: on
+name: vMenu Framework
+version: 0.0.2
+author: Willow Development
+description: a vMenu Framework recipe created by Willow Development, to make vMenu server creation's much easier.
+
+
+tasks:
+ # Download default CFX resources
+    - action: download_github
+      src: https://github.com/citizenfx/cfx-server-data
+      ref: master
+      subpath: resources
+      dest: ./resources
+
+# Download base files
+    - action: download_github
+      src: https://github.com/PeEcEeChIP/vMenu-txadminRecipe
+      ref: main
+      dest: ./tmp/vmenu
+
+    - action: move_path
+      src: ./tmp/vmenu/server.cfg
+      dest: ./server.cfg
+      
+    - action: move_path
+      src: ./tmp/vmenu/easyadmin_permissions.cfg
+      dest: ./easyadmin_permissions.cfg
+
+    - action: move_path
+      src: ./tmp/vmenu/other_permissions.cfg
+      dest: ./other_permissions.cfg
+
+    - action: move_path
+      src: ./tmp/vmenu/myLogo.png
+      dest: ./myLogo.png 
+
+    - action: move_path
+      src: ./tmp/vmenu/resources.cfg
+      dest: ./resources.cfg
+
+    - action: download_file
+      path: ./tmp/vMenu-v3.5.0.zip
+      url: https://github.com/TomGrobbe/vMenu/releases/download/v3.5.0/vMenu-v3.5.0.zip
+    - action: unzip
+      dest: ./resources/[Menus]/vMenu
+      src: ./tmp/vMenu-v3.5.0.zip
+
+    - action: download_file
+      path: ./tmp/MenuAPI-v3.2.2-FiveM.zip
+      url: https://github.com/TomGrobbe/MenuAPI/releases/download/v3.2.2/MenuAPI-v3.2.2-FiveM.zip
+    - action: unzip
+      dest: ./resource/[API]/MenuAPI  
+      src: ./tmp/MenuAPI-v3.2.2-FiveM.zip
+
+    - action: download_file
+      path: ./tmp/NativeUILua-2.1.0.zip
+      url: https://github.com/FrazzIe/NativeUILua/archive/refs/tags/2.1.0.zip
+    - action: unzip
+      dest: ./resource/[API]/NativeUI
+      src: ./tmp/NativeUILua-2.1.0.zip
+    - action: remove_path
+      path: ./resource/[API]/NativeUI/MenuExample
+    
+    - action: download_file
+      path: ./tmp/SEM_InteractionMenu-master.zip
+      url: https://github.com/Sc0ttM/SEM_InteractionMenu/archive/master.zip
+    - action: unzip
+      dest: ./resource/[Menus]/SEM_InteractionMenu
+      src: ./tmp/SEM_InteractionMenu-master.zip
+# Clean up
+    - action: remove_path
+      path: ./tmp
